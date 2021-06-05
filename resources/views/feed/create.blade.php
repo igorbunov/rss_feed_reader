@@ -52,12 +52,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="is_notify" class="col-md-2 col-form-label text-md-right">{{ __('Is Notify') }}</label>
+                            <label for="is_notify" class="col-md-2 col-form-label text-md-right">{{ __('Email Notify') }}</label>
 
                             <input type="hidden" name="is_notify" value="0">
 
                             <div class="col-md-10">
                                 <input id="is_notify" type="checkbox" name="is_notify" value="1" @if(old('is_notify') == '1')) checked @endif autocomplete="false">
+                                <label for="is_notify" class="col-form-label ml-4">{{ __('Once in hour') }}</label>
                             </div>
                         </div>
 
