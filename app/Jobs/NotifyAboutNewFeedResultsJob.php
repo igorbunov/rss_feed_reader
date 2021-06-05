@@ -22,7 +22,7 @@ class NotifyAboutNewFeedResultsJob
      *
      * @return void
      */
-    public function __construct(int $lentthInMinutes = 30)
+    public function __construct(int $lentthInMinutes = 60)
     {
         $this->lentthInMinutes = $lentthInMinutes;
     }
