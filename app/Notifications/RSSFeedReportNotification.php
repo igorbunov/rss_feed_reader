@@ -5,25 +5,27 @@ namespace App\Notifications;
 use App\Models\Feed;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewFeedResultsNotification extends Notification
+class RSSFeedReportNotification extends Notification
 {
     use Queueable;
 
     protected $feed;
     protected $count;
+    protected $feedResult;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Feed $feed, int $count)
+    public function __construct(Feed $feed, int $count, Collection $feedResult)
     {
         $this->feed = $feed;
         $this->count = $count;
+        $this->feedResult = $feedResult;
     }
 
     /**
@@ -46,9 +48,13 @@ class NewFeedResultsNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line("You received new {$this->count} results on your feeds")
-                    ->action('Watch results', url('/'))
-                    ->line('Thank you for using our application!');
+            ->from(config('mail.from.address'), config('mail.from.name'))
+            ->subject('RSS Feed report')
+            ->markdown('mail.rss.report', [
+                'feed' => $this->feed,
+                'count' => $this->count,
+                'feedResult' => $this->feedResult
+            ]);
     }
 
     /**

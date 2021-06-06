@@ -2,7 +2,7 @@ try here: http://simple-rss.ru/<br/>
 
 composer install<br/>
 npm install && npm run dev<br/>
-copy .evn.example to .env<br/>
+copy .env.example to .env<br/>
 set db credentials<br/>
 
 php artisan migrate:fresh --seed

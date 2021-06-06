@@ -84,7 +84,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'igorbunov.ua@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@simple-rss.ru'),
         'name' => env('MAIL_FROM_NAME', 'Simple RSS'),
     ],
 

@@ -3,8 +3,9 @@
 namespace App\Jobs;
 
 use App\Models\Feed;
+use App\Models\FeedResult;
 use App\Models\User;
-use App\Notifications\NewFeedResultsNotification;
+use App\Notifications\RSSFeedReportNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Queue\SerializesModels;
@@ -15,16 +16,16 @@ class NotifyAboutNewFeedResultsJob
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $lentthInMinutes;
+    protected $lengthInMinutes;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(int $lentthInMinutes = 60)
+    public function __construct(int $lengthInMinutes = 60)
     {
-        $this->lentthInMinutes = $lentthInMinutes;
+        $this->lengthInMinutes = $lengthInMinutes;
     }
 
     /**
@@ -41,11 +42,18 @@ class NotifyAboutNewFeedResultsJob
                 $user = User::find($data->user_id);
                 $feed = Feed::withoutGlobalScopes()->find($data->id);
 
-                $user->notify(new NewFeedResultsNotification($feed, $data->cnt));
+                $user->notify(new RSSFeedReportNotification($feed, $data->cnt, $this->getLatestFeeds($feed)));
             } catch (\Exception $err) {
                 info('error in notification: ' . $err->getMessage());
             }
         }
+    }
+
+    protected function getLatestFeeds(Feed $feed)
+    {
+        return FeedResult::where('feed_id', $feed->id)
+            ->whereRaw("created_at + interval {$this->lengthInMinutes} minute > now()")
+            ->get();
     }
 
     protected function getNewResultsCount(): array
@@ -56,7 +64,7 @@ class NotifyAboutNewFeedResultsJob
             inner join (
                 select feed_id, count(1) as cnt
                 from feed_results
-                where created_at + interval {$this->lentthInMinutes} minute > now()
+                where created_at + interval {$this->lengthInMinutes} minute > now()
                 group by feed_id
             )a on f.id = a.feed_id
             where f.is_notify = 1 and f.deleted_at is null"
