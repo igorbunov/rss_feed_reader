@@ -33,9 +33,13 @@ class LoadFeedsResultsJob
         $feeds = Feed::withoutGlobalScopes()->whereHas('user')->get();
 
         foreach ($feeds as $feed) {
-            $loadedCount = $this->loadFeedResults($feed);
+            try {
+                $loadedCount = $this->loadFeedResults($feed);
 
-            info("Feed #{$feed->id}: loaded {$loadedCount}");
+                info("Feed #{$feed->id}: loaded {$loadedCount}");
+            } catch (\Exception $err) {
+                info('Error load feed results: ' . $err->getMessage());
+            }
         }
     }
 
