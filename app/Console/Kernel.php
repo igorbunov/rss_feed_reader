@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        if (config('app.env') == 'production') {
+        if (config('app.env') == 'production' and config('app.auto_deployment')) {
             $schedule->call(function () {
                 DeployCodeJob::dispatch();
             })->everyFiveMinutes();

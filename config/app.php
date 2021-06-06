@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'auto_deployment' => env('AUTO_DEPLOYMENT', false),
 
     /*
     |--------------------------------------------------------------------------
