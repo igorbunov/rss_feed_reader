@@ -36,7 +36,13 @@
                             </tr>
                             @forelse ($results as $result)
                                 <tr>
-                                    <td><a href="{{ $result->link }}" target="__blank">{{ $result->title }}</a></td>
+                                    <td>
+                                        @if (!empty($result->prefix))
+                                        <a href="{{ $result->link }}" target="__blank"><span style="color: black;font-size:12px;">{{ $result->prefix }}</span> {{ $result->title }}</a>
+                                        @else
+                                        <a href="{{ $result->link }}" target="__blank">{{ $result->title }}</a>
+                                        @endif
+                                    </td>
                                     <td>{{ $result->updated_at->diffForHumans() }}</td>
                                 </tr>
                             @empty
