@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\DeployCodeJob;
 use App\Jobs\LoadFeedsResultsJob;
 use App\Jobs\NotifyAboutNewFeedResultsJob;
 use Illuminate\Console\Scheduling\Schedule;
@@ -27,6 +28,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        if (config('app.env') == 'production') {
+            $schedule->call(function () {
+                DeployCodeJob::dispatch();
+            })->everyFiveMinutes();
+        }
 
         $schedule->call(function () {
             LoadFeedsResultsJob::dispatch();
