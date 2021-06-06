@@ -24,6 +24,8 @@
                             <option @if($feed->id == $feedId) selected @endif value="{{ $feed->id }}">{{ $feed->name }}</option>
                             @endforeach
                         </select>
+
+                        <a href="{{ route('feed.create') }}" class="btn btn-primary" style="width: 122px;margin-left:10px;">New Feed</a>
                     </div>
 
                     <br/>
