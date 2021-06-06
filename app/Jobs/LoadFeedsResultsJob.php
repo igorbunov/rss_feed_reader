@@ -30,7 +30,10 @@ class LoadFeedsResultsJob
      */
     public function handle()
     {
-        $feeds = Feed::withoutGlobalScopes()->whereHas('user')->get();
+        $feeds = Feed::withoutGlobalScopes()
+            ->whereHas('user')
+            ->whereNull('deleted_at')
+            ->get();
 
         foreach ($feeds as $feed) {
             try {
