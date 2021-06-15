@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Jobs\DeployCodeJob;
 use App\Jobs\LoadFeedsResultsJob;
+use App\Jobs\RemoveOldRecordsJob;
 use App\Jobs\NotifyAboutNewFeedResultsJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -42,6 +43,10 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             NotifyAboutNewFeedResultsJob::dispatch();
         })->hourly();
+
+        $schedule->call(function () {
+            RemoveOldRecordsJob::dispatch();
+        })->weekly();
     }
 
     /**
