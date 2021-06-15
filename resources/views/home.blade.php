@@ -66,6 +66,10 @@
 @section('scripts')
     <script>
         $(function () {
+            $('tr.unwatched > td > a').click(function() {
+                $(this).parents('.unwatched').removeClass('unwatched');
+            });
+
             $('#feed_id').on('change', function() {
                 if (this.value > 0) {
                     let url = [

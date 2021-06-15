@@ -33,11 +33,12 @@ class DeployCodeJob implements ShouldQueue
         $deployCommands = [
             'git pull',
             'composer install',
-            'npm install',
-            'php artisan migrate --force --no-interaction'
+            'npm install'
         ];
 
         exec(implode(' & ', $deployCommands));
+
+        exec('php artisan migrate --force --no-interaction');
 
         $clearCacheCommands = [
             'php artisan cache:clear',
