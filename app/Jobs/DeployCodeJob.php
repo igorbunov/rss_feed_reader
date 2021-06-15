@@ -34,7 +34,7 @@ class DeployCodeJob implements ShouldQueue
             'git pull',
             'composer install',
             'npm install',
-            'php artisan migrate --force'
+            'php artisan migrate --force --no-interaction'
         ];
 
         exec(implode(' & ', $deployCommands));
