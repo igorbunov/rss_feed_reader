@@ -13,7 +13,8 @@ class FeedResult extends Model
     protected $fillable = [
         'feed_id',
         'link',
-        'title'
+        'title',
+        'is_watched'
     ];
 
     public function feed()

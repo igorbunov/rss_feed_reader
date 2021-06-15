@@ -37,7 +37,7 @@
                                 <th>Date</th>
                             </tr>
                             @forelse ($results as $result)
-                                <tr>
+                                <tr @if ($result->is_watched == 0) class="unwatched" @endif>
                                     <td>
                                         @if (!empty($result->prefix))
                                         <a href="{{ $result->link }}" target="__blank"><span style="color: black;font-size:12px;">{{ $result->prefix }}</span> {{ $result->title }}</a>

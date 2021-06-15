@@ -27,6 +27,12 @@
         gtag('config', '{{ env("GOOGLE_ANALYTICS_TAG") }}');
         </script>
     @endif
+
+    <style>
+        .unwatched {
+            background-color: lavenderblush;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
