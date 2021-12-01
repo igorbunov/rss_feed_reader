@@ -22,7 +22,7 @@
     color: #000000;
 }
 [data-theme=dark] .unwatched {
-    background-color: #463b3f;
+    background-color: #2e2629;
 }
 [data-theme=light] .unwatched {
     background-color: lavenderblush;
