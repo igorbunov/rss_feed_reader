@@ -29,12 +29,6 @@
     @endif
 
     <link rel="stylesheet" href="{{ asset('dark-theme/darktheme.css') }}"/>
-
-    <style>
-        .unwatched {
-            background-color: lavenderblush;
-        }
-    </style>
 </head>
 <body>
     <div id="app">

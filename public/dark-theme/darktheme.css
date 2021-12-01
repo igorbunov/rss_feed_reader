@@ -20,7 +20,13 @@
 }
 [data-theme=light] .table span {
     color: #000000;
-  }
+}
+[data-theme=dark] .unwatched {
+    background-color: #463b3f;
+}
+[data-theme=light] .unwatched {
+    background-color: lavenderblush;
+}
 [data-theme=dark] .list-group-item {
   color: #bebebe;
   background-color: #181818;
