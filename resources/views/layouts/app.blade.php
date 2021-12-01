@@ -28,6 +28,8 @@
         </script>
     @endif
 
+    <link rel="stylesheet" href="{{ asset('dark-theme/darktheme.css') }}"/>
+
     <style>
         .unwatched {
             background-color: lavenderblush;
@@ -36,7 +38,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav id="top-navbar" class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="/favicon.ico" style="width: 30px; height: 30px;"/>
@@ -56,6 +58,13 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                            <li class="nav-item">
+                                <div class="custom-control custom-switch pt-2 pr-3">
+                                    <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                                    <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+                                </div>
+                            </li>
+
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -68,6 +77,13 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <div class="custom-control custom-switch pt-2 pr-3">
+                                    <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                                    <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+                                </div>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('feed.index') }}">{{ __('Feed') }}</a>
                             </li>
@@ -103,5 +119,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
+
+    <script src="{{ asset('dark-theme/theme.js') }}"></script>
+    <script src="{{ asset('dark-theme/darkswitch.js') }}"></script>
 </body>
 </html>
