@@ -6,11 +6,6 @@ use App\Http\Controllers\FeedResultController;
 
 Auth::routes(['verify' => true]);
 
-// Route::get('/notify', function() {
-//     \App\Jobs\NotifyAboutNewFeedResultsJob::dispatch();
-//     \App\Jobs\LoadFeedsResultsJob::dispatch();
-// });
-
 Route::group([
         'middleware' => ['auth', 'verified']
     ], function () {

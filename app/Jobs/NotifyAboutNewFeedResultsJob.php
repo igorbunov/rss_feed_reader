@@ -3,16 +3,17 @@
 namespace App\Jobs;
 
 use App\Models\Feed;
-use App\Models\FeedResult;
 use App\Models\User;
-use App\Notifications\RSSFeedReportNotification;
+use App\Models\FeedResult;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Notifications\RSSFeedReportNotification;
 
-class NotifyAboutNewFeedResultsJob
+class NotifyAboutNewFeedResultsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
