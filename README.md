@@ -1,4 +1,4 @@
-try here: http://simple-rss.ru/<br/>
+try here: https://simple-rss.ru/<br/>
 
 composer install<br/>
 npm install && npm run dev<br/>
